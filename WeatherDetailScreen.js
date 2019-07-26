@@ -64,9 +64,9 @@ export default class WeatherDetailScreen extends React.Component {
     
     if(clouds >= 90) //흐린날씨
     {
-       if(huminity >= 80) 
+       if(celsius >= 20) 
       {
-        if(celsius >= 20)
+        if(huminity >= 80)
        {
           return (
           <ImageBackground
@@ -81,12 +81,11 @@ export default class WeatherDetailScreen extends React.Component {
               <Image 
               style = {{width : '7%', height : '7%'}}
               source = {require('./assets/bad.png')}/>
-              <Text style ={styles.textsmall}>불쾌지수가 높으니 주의하세요 </Text>
+              <Text style ={styles.textsmall}>불쾌지수가 높으니 주의하세요!</Text>
             </ImageBackground>
         );
        }
-      }
-      else {
+        else {
         return (
           <ImageBackground
             style = {{height: '100%', width : '100%'}}
@@ -97,13 +96,31 @@ export default class WeatherDetailScreen extends React.Component {
                 {"\n"}Wind Speed : {windspeed}m/s
                 {"\n"}Wind Direction : {winddirection.toFixed(1)}º
                 {"\n"}Huminity : {huminity.toFixed(1)}% </Text>
-              <Text style ={styles.textsmall}>날씨가 뜨거우니 자외선에 주의하세요 </Text>
+              <Text style ={styles.textsmall}>날씨가 뜨거우니 자외선에 주의하세요!</Text>
               
             </ImageBackground>
         );
       }
-       if (celsius <= 5)
+    }
+    if (celsius <= 5)
        {
+        if(huminity < 30)
+        {
+          return (
+            <ImageBackground
+              style = {{height: '100%', width : '100%'}}
+              source = {require('./assets/cloud-winter-back-font.png')}>
+              <Text style ={styles.textcityname}>{"\n\n\n\n\n\n"}{cityname}</Text>
+              <Text style ={styles.texttemp}> {celsius.toFixed(1)}º</Text>
+              <Text style ={styles.textinfo}>Cloudiness : {clouds}%
+                  {"\n"}Wind Speed : {windspeed}m/s
+                  {"\n"}Wind Direction : {winddirection}º
+                  {"\n"}Huminity : {huminity}% </Text>
+                <Text style ={styles.textsmall}>날씨가 많이 건조하니 주의하세요!</Text>
+              </ImageBackground>
+          );
+        }
+        else {
         return (
           <ImageBackground
             style = {{height: '100%', width : '100%'}}
@@ -114,9 +131,10 @@ export default class WeatherDetailScreen extends React.Component {
                 {"\n"}Wind Speed : {windspeed}m/s
                 {"\n"}Wind Direction : {winddirection}º
                 {"\n"}Huminity : {huminity}% </Text>
-              <Text style ={styles.textsmall}>날씨가 추우니 감기에 조심하세요 </Text>
+              <Text style ={styles.textsmall}>날씨가 추우니 감기에 조심하세요!</Text>
             </ImageBackground>
         );
+        }
        }
        else {
         return (
@@ -134,10 +152,10 @@ export default class WeatherDetailScreen extends React.Component {
        }
       }
       else {
-        if(huminity >= 80) 
-      {
-        if(celsius >= 20)
-       {
+        if(celsius >= 20) 
+        {
+        if(huminity >= 80)
+          {
           return (
           <ImageBackground
             style = {{height: '100%', width : '100%'}}
@@ -151,12 +169,11 @@ export default class WeatherDetailScreen extends React.Component {
               <Image 
               style = {{width : '7%', height : '7%'}}
               source = {require('./assets/bad.png')}/>
-              <Text style ={styles.textsmall}>불쾌지수가 높으니 주의하세요 </Text>
+              <Text style ={styles.textsmall}>불쾌지수가 높으니 주의하세요!</Text>
               
             </ImageBackground>
         );
        }
-      }
       else {
         return (
           <ImageBackground
@@ -168,13 +185,31 @@ export default class WeatherDetailScreen extends React.Component {
                 {"\n"}Wind Speed : {windspeed}m/s
                 {"\n"}Wind Direction : {winddirection.toFixed(1)}º
                 {"\n"}Huminity : {huminity.toFixed(1)}% </Text>
-              <Text style ={styles.textsmall}>날씨가 뜨거우니 자외선에 주의하세요 </Text>
+              <Text style ={styles.textsmall}>날씨가 뜨거우니 자외선에 주의하세요!</Text>
               
             </ImageBackground>
         );
       }
+      }
        if (celsius <= 5)
        {
+        if(huminity < 30)
+        {
+          return (
+            <ImageBackground
+              style = {{height: '100%', width : '100%'}}
+              source = {require('./assets/clear-winter-back-font.png')}>
+              <Text style ={styles.textcityname}>{"\n\n\n\n\n\n"}{cityname}</Text>
+              <Text style ={styles.texttemp}> {celsius.toFixed(1)}º</Text>
+              <Text style ={styles.textinfo}>Cloudiness : {clouds}%
+                  {"\n"}Wind Speed : {windspeed}m/s
+                  {"\n"}Wind Direction : {winddirection}º
+                  {"\n"}Huminity : {huminity}% </Text>
+                <Text style ={styles.textsmall}>날씨가 많이 건조하니 주의하세요!</Text>
+              </ImageBackground>
+          );
+        }
+        else {
         return (
           <ImageBackground
             style = {{height: '100%', width : '100%'}}
@@ -185,9 +220,10 @@ export default class WeatherDetailScreen extends React.Component {
                 {"\n"}Wind Speed : {windspeed}m/s
                 {"\n"}Wind Direction : {winddirection}º
                 {"\n"}Huminity : {huminity}% </Text>
-              <Text style ={styles.textsmall}>날씨가 추우니 감기에 조심하세요 </Text>
+              <Text style ={styles.textsmall}>날씨가 추우니 감기에 조심하세요!</Text>
             </ImageBackground>
-        );
+          );
+        }
        }
        else {
         return (
@@ -204,7 +240,7 @@ export default class WeatherDetailScreen extends React.Component {
         );
        }
       }
-  }
+    }
 }
 
 const styles = StyleSheet.create({
