@@ -1,9 +1,8 @@
 import React from 'react';
-import { FlatList, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
+import { FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { Constants } from 'expo';
 import { ScrollView } from 'react-native-gesture-handler';
 import { Input } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 
@@ -20,7 +19,7 @@ export default class CityList extends React.Component {
 
     this.state = {
       cities: [],
-      pre_cities: [],
+      search_cities: [],
       search_input : "",
     };
   }
@@ -31,8 +30,10 @@ export default class CityList extends React.Component {
       .then(cities => {
         console.log('cities =', cities.length);
         this.setState({
-          cities
+          cities : cities,
+          search_cities : cities
         });
+        
       });
   }
 
@@ -45,17 +46,14 @@ export default class CityList extends React.Component {
     );
   }
   onKeyPressInput(){
-    let pre_cities = this.state.pre_cities;
     let search_input = this.state.search_input;
     let cities = this.state.cities;
-    if(pre_cities===[]){
-      console.log("hello")
-      pre_cities = cities;
-    }else{
-      pre_cities = pre_cities
-    }
-    console.log(search_input);
-    this.state.cities = pre_cities.filter(city=>city.indexOf(search_input)>-1);
+
+    this.setState({
+      search_cities : cities.filter(city=>city.indexOf(search_input)>-1)
+    })
+
+
   }
   renderItem(city) {
     return (
@@ -77,7 +75,7 @@ export default class CityList extends React.Component {
         <FlatList style={styles.container}
                   renderItem={({ item }) => this.renderItem(item)}
                   keyExtractor={item => item}
-                  data={this.state.cities}
+                  data={this.state.search_cities}
         />
       </ScrollView>
     );
