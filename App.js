@@ -4,7 +4,6 @@ import { createStackNavigator, createAppContainer } from 'react-navigation';
 import CityList from './CityList';
 import WeatherDetailScreen from './WeatherDetailScreen';
 
-
 const AppNavigator = createStackNavigator(
   {
     CityList: CityList,
