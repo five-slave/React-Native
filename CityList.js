@@ -1,6 +1,9 @@
 import React from 'react';
-import { FlatList, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
+import { FlatList, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { Constants } from 'expo';
+import { ScrollView } from 'react-native-gesture-handler';
+import { Input } from 'react-native-elements';
+
 
 
 export default class CityList extends React.Component {
@@ -16,6 +19,8 @@ export default class CityList extends React.Component {
 
     this.state = {
       cities: [],
+      search_cities: [],
+      search_input : "",
     };
   }
 
@@ -25,8 +30,10 @@ export default class CityList extends React.Component {
       .then(cities => {
         console.log('cities =', cities.length);
         this.setState({
-          cities
+          cities : cities,
+          search_cities : cities
         });
+        
       });
   }
 
@@ -38,7 +45,16 @@ export default class CityList extends React.Component {
       }
     );
   }
+  onKeyPressInput(){
+    let search_input = this.state.search_input;
+    let cities = this.state.cities;
 
+    this.setState({
+      search_cities : cities.filter(city=>city.indexOf(search_input)>-1)
+    })
+
+
+  }
   renderItem(city) {
     return (
       <TouchableOpacity style={styles.item} onPress={() => this.onPressCity(city)}>
@@ -49,11 +65,19 @@ export default class CityList extends React.Component {
 
   render() {
     return (
-      <FlatList style={styles.container}
-                renderItem={({ item }) => this.renderItem(item)}
-                keyExtractor={item => item}
-                data={this.state.cities}
-      />
+      <ScrollView>
+        <Input
+          placeholder='City Name'
+          onKeyPress={()=>this.onKeyPressInput()}
+          onChangeText={(search_input) => this.setState({search_input})}
+          value={this.state.search_input}
+        />
+        <FlatList style={styles.container}
+                  renderItem={({ item }) => this.renderItem(item)}
+                  keyExtractor={item => item}
+                  data={this.state.search_cities}
+        />
+      </ScrollView>
     );
   }
 }
